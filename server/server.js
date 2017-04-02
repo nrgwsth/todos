@@ -14,6 +14,8 @@ const mongoose = require("mongoose");
 
 const bluebird = require("bluebird");
 
+const favicon = require("serve-favicon");
+
 const path = require("path");
 
 const configurePassport = require("./api/auth/configurePassport");
@@ -31,6 +33,8 @@ app.use(passport.session());
 dotenv.config();
 
 mongoose.Promise = bluebird;
+
+app.use(favicon(path.resolve(__dirname, './../client/favicon.ico')));
 
 mongoose.connect(process.env.MONGO_URL ? process.env.MONGO_URL : "mongodb://localhost/todos", function(err){
 	if(err){
