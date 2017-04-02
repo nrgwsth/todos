@@ -32,7 +32,7 @@ dotenv.config();
 
 mongoose.Promise = bluebird;
 
-mongoose.connect("mongodb://localhost/todos", function(err){
+mongoose.connect(process.env.MONGO_URL ? process.env.MONGO_URL : "mongodb://localhost/todos", function(err){
 	if(err){
 		throw err;
 	} else{
