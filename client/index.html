@@ -9,7 +9,6 @@
 	<script src="/js/lib/jquery.min.js"></script>
 	<script src="/js/lib/bootstrap.min.js"></script>
 	<script src="/js/app.js"></script>
-  <script src="/js/service.js"></script>
 	<script src="/js/controller.js"></script>
 	<script src="/js/directive.js"></script>
 </head>
@@ -45,9 +44,23 @@
   </div>
 
   <div class="login-wrapper" ng-if="loginDivVisibility">
-    <pre>{{loginDivVisibility}}</pre>
     <div class="login-div">
-      <button class="btn btn-primary"><a href="/auth/twitter">Login with twitter</a></button>
+      <a href="/auth/twitter" class="btn btn-primary btn-custom login-btn">Login with twitter</a>
+      <!--<a href="/auth/facebook" class="btn btn-primary btn-custom login-btn">Login with Facebook</a>-->
+      <small class="info-text">You will need to login so that we can save your notes.</small>
+    </div>
+  </div>
+
+  <div class="logout" ng-if="!loginDivVisibility">
+    <div class="creden-btn-wrapper">
+      <button class="btn btn-info btn-custom btn-creden">
+        <img ng-src="{{user.photo}}" width="20px" height="20px" />
+        <span>Hello {{user.displayName}}</span>
+      </button>
+    </div>
+
+    <div class="logout-btn-wrapper">
+      <a ng-click="onLogoutClick()" class="btn btn-info btn-logout btn-custom" role="button">Logout</a>
     </div>
   </div>
 </div>

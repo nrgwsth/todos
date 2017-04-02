@@ -22,6 +22,7 @@ app.use(express.static(path.resolve(__dirname, "./../client/app")));
 
 app.use(require('serve-static')(__dirname + '/../../public'));
 app.use(require('cookie-parser')());
+app.use(require("body-parser").json());
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
@@ -31,7 +32,7 @@ dotenv.config();
 
 mongoose.Promise = bluebird;
 
-mongoose.connect("mongodb://localhost:todos", function(err){
+mongoose.connect("mongodb://localhost/todos", function(err){
 	if(err){
 		throw err;
 	} else{

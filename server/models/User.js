@@ -6,7 +6,7 @@ var User_Schema = new Schema({
 	"id": String,
 	"username": String,
 	"displayName": String,
-	"photos": [],
+	"photo": String,
 	"notes": []
 });
 
@@ -26,7 +26,7 @@ User.findOrCreate = function(data ,cb){
 
 			user.username = data.profile.username;
 			user.displayName = data.profile.displayName;
-			user.photos = data.profile.photos;
+			user.photo = data.profile.photos[0].value;
 
 			user.save();
 

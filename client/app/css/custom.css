@@ -8,7 +8,7 @@ body, html, main, .main, .app, app {
 min-height: 100%;
 height: 100%;
 background-color: #efefef;
-padding: 20px 5px;
+padding: 30px 5px;
 }
 
 body {
@@ -169,7 +169,7 @@ cursor: pointer;
 
 .login-div{
   position: fixed;
-  padding: 60px 30px;
+  padding: 60px 30px 30px 30px;
   border: 1px solid #777;
   width: 400px;
   left: 50%;
@@ -177,6 +177,11 @@ cursor: pointer;
   transform: translate(-50%, -50%);
   text-align: center;
   background-color: #efefef;
+  transition: background-color 0.5s;
+}
+
+.login-div:hover{
+  background-color: #fff;
 }
 
 button a{
@@ -185,9 +190,64 @@ button a{
 
 button a:hover{
   text-decoration: none;
-  color: #aaa;
 }
 a{
   text-decoration: none;
 }
 
+
+.logout{
+  position: absolute;
+  top: 5px;
+  right: 20px;
+  width: 200px;
+  transition: all 0.5s;
+}
+
+.logout:hover{
+  transform: rotateY(180deg);
+}
+
+.btn-logout, .btn-creden{
+  width: 200px;
+  max-width: 200px;
+}
+
+.logout-btn-wrapper{
+  position: absolute;
+  width: 200px;
+  max-width: 200px;
+  transform: rotateY(180deg);
+  opacity: 0;
+}
+
+.logout-btn-wrapper:hover{
+  opacity: 1;
+}
+
+.creden-btn-wrapper{
+  width: 200px;
+  max-width: 200px;
+  position: absolute;
+}
+
+.btn-custom{
+  border-radius: 0;
+}
+
+.login-btn{
+  width: 200px;
+  margin: 5px 0;
+}
+
+
+button a{
+  width: 100%;
+  height: 100%;
+}
+
+.info-text{
+  display: block;;
+  color: #777;
+  margin-top: 20px;
+}

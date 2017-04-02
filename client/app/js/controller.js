@@ -1,31 +1,26 @@
-app.controller("mainCtrl", ["$scope", "auth", function($scope, auth) {
+app.controller("mainCtrl", ["$scope", "api", function($scope, api) {
 	
 	$scope.loginDivVisibility = false;
 
-	auth.isUserLoggedIn().then((user)=>{
+	$scope.user = null;
+
+	$scope.notes = [];
+
+	api.isUserLoggedIn().then((user)=>{
+		$scope.user = user;
 		if(user == null){
-			$scope.loginDivVisibility = true;
+			$scope.$apply(function(){
+				$scope.loginDivVisibility = true;
+			});
+			
 		} else{
 			$scope.$apply(function(){
 				$scope.loginDivVisibility = false;
-			})
+				$scope.notes = user.notes;
+			});
 			
 		}
 	});
-
-	$scope.notes = [{
-		title: "sample note 1",
-		value: "lorem ipsum dolor amet",
-		color: "aqua"
-	}, {
-		title: "sample note 2",
-		value: "lorem ipsum dolor amet",
-		color: "beige"
-	}, {
-		title: "sapmle note 3",
-		value: "lorem ipsum dolor amet",
-		color: "coral"
-	}];
 
 	$scope.newNote = {
 		title: "",
@@ -34,8 +29,10 @@ app.controller("mainCtrl", ["$scope", "auth", function($scope, auth) {
 	}
 
 	$scope.colors = ["beige", "aquamarine", "azure", "crimson", "coral", "gold"];
+
 	$scope.onclick = function(note, i) {
 		$scope.notes.splice(i, 1);
+		api.deleteNote($scope.user, i);
 	}
 	$scope.isUserTyping = false;
 
@@ -58,6 +55,8 @@ app.controller("mainCtrl", ["$scope", "auth", function($scope, auth) {
 	$scope.onFromSubmit = function(newNote) {
 		if (newNote.title && newNote.value) {
 			$scope.notes.push(newNote);
+			api.makeNewNote($scope.user, newNote);
+
 		}
 		reset();
 	}
@@ -80,5 +79,16 @@ app.controller("mainCtrl", ["$scope", "auth", function($scope, auth) {
 	$scope.selectColor = function(color) {
 		$scope.newNote.color = color;
 		$scope.isSelectorVisible = false;
+	}
+
+	$scope.onLogoutClick = function(){
+		console.log("user logout");
+		api.onLogoutClick().then(data=>{
+			$scope.$apply(function(){
+				$scope.user = null;
+				$scope.loginDivVisibility = true;
+			})
+			
+		})
 	}
 }]);
