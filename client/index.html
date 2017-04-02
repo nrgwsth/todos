@@ -33,7 +33,7 @@
         </div>
         
         <div class="row">
-          <note-card ng-repeat="note in notes"/>
+          <note-card ng-repeat="note in user.notes track by $index"/>
         </div>
           
         

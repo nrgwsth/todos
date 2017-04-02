@@ -4,8 +4,6 @@ app.controller("mainCtrl", ["$scope", "api", function($scope, api) {
 
 	$scope.user = null;
 
-	$scope.notes = [];
-
 	api.isUserLoggedIn().then((user)=>{
 		$scope.user = user;
 		if(user == null){
@@ -31,7 +29,7 @@ app.controller("mainCtrl", ["$scope", "api", function($scope, api) {
 	$scope.colors = ["beige", "aquamarine", "azure", "crimson", "coral", "gold"];
 
 	$scope.onclick = function(note, i) {
-		$scope.notes.splice(i, 1);
+		$scope.user.notes.splice(i, 1);
 		api.deleteNote($scope.user, i);
 	}
 	$scope.isUserTyping = false;
@@ -54,7 +52,7 @@ app.controller("mainCtrl", ["$scope", "api", function($scope, api) {
 
 	$scope.onFromSubmit = function(newNote) {
 		if (newNote.title && newNote.value) {
-			$scope.notes.push(newNote);
+			$scope.user.notes.push(newNote);
 			api.makeNewNote($scope.user, newNote);
 
 		}

@@ -33,7 +33,6 @@ var app = angular.module("todosapp", []).config(["$provide", function($provide){
 					note:note
   				}
 			}).then(res=>{
-				user.notes.push(note);
 				localStorage.setItem("tuser", JSON.stringify(user));
 			});
 		}
